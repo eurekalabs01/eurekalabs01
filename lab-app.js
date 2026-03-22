@@ -3,7 +3,8 @@
 //  EUREKA LABS — LAB DETAIL PAGE RENDERING (lab-app.js)
 //
 //  Reads the "id" query parameter from the URL, finds the matching lab
-//  in data.js, and renders the lab detail page.
+//  in data.js, and renders the lab detail page with image, authors,
+//  PDF download, and metadata.
 //
 //  You should NOT need to edit this file — edit data.js instead.
 //
@@ -52,12 +53,16 @@ function renderLabPage() {
         '<p>The requested lab does not exist. It may have been removed or the URL may be incorrect.</p>' +
         '<a href="index.html" class="btn-primary">Back to all labs</a>' +
       '</div>';
-    document.title = "Not Found — Eureka Labs";
+    document.title = "Not Found \u2014 Eureka Labs";
     return;
   }
 
-  // Update page title
-  document.title = esc(lab.title) + " — Eureka Labs";
+  // Update page title and meta description
+  document.title = lab.title + " \u2014 Eureka Labs";
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.setAttribute("content", lab.title + " \u2014 " + lab.description.substring(0, 150) + "...");
+  }
 
   // Build tags
   var tagsHTML = lab.categories.map(function(catId) {
@@ -68,21 +73,63 @@ function renderLabPage() {
   var lv = LEVELS[lab.level] || { label: lab.level, color: "#666", bg: "#eee" };
   tagsHTML += tagHTML(lv.label, lv.color, lv.bg);
 
-  // Build objectives list
-  var objectivesHTML = "";
-  if (lab.objectives && lab.objectives.length > 0) {
-    objectivesHTML =
+  // Build image
+  var imageHTML = "";
+  if (lab.image) {
+    var imgSrc = lab.image.startsWith("http") ? lab.image : SITE_BASE + lab.image;
+    imageHTML = '<div class="lab-image"><img src="' + esc(imgSrc) + '" alt="' + esc(lab.title) + '"></div>';
+  }
+
+  // Build metadata bar (authors, date, time)
+  var metaItems = [];
+
+  if (lab.authors) {
+    metaItems.push(
+      '<div class="lab-meta-item">' +
+        '<span class="meta-label">Authors</span>' +
+        '<span>' + esc(lab.authors) + '</span>' +
+      '</div>'
+    );
+  }
+
+  if (lab.updated) {
+    metaItems.push(
+      '<div class="lab-meta-item">' +
+        '<span class="meta-label">Last updated</span>' +
+        '<span>' + esc(lab.updated) + '</span>' +
+      '</div>'
+    );
+  }
+
+  if (lab.estimatedTime) {
+    metaItems.push(
+      '<div class="lab-meta-item">' +
+        '<span class="meta-label">Estimated time</span>' +
+        '<span>' + esc(lab.estimatedTime) + '</span>' +
+      '</div>'
+    );
+  }
+
+  var metaHTML = "";
+  if (metaItems.length > 0) {
+    metaHTML = '<div class="lab-meta">' + metaItems.join("") + '</div>';
+  }
+
+  // Build PDF download button
+  var pdfHTML = "";
+  if (lab.pdf) {
+    var pdfSrc = lab.pdf.startsWith("http") ? lab.pdf : SITE_BASE + lab.pdf;
+    pdfHTML =
       '<div class="lab-section">' +
-        '<h2>Learning objectives</h2>' +
-        '<ul class="objectives-list">' +
-          lab.objectives.map(function(obj) {
-            return '<li>' + esc(obj) + '</li>';
-          }).join("") +
-        '</ul>' +
+        '<h2>Lab manual</h2>' +
+        '<a href="' + esc(pdfSrc) + '" target="_blank" rel="noopener" class="btn-primary">' +
+          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px"><path d="M3 14h10M8 2v9M4 7l4 4 4-4"/></svg>' +
+          'Download PDF' +
+        '</a>' +
       '</div>';
   }
 
-  // Build resources list
+  // Build resources list (optional extra links)
   var resourcesHTML = "";
   if (lab.resources && lab.resources.length > 0) {
     resourcesHTML =
@@ -96,32 +143,6 @@ function renderLabPage() {
       '</div>';
   }
 
-  // Build authors
-  var authorsHTML = "";
-  if (lab.authors && lab.authors.length > 0) {
-    authorsHTML =
-      '<div class="lab-meta-item">' +
-        '<span class="meta-label">Authors</span>' +
-        '<span>' + lab.authors.map(esc).join(", ") + '</span>' +
-      '</div>';
-  }
-
-  // Build updated date
-  var updatedHTML = "";
-  if (lab.updated) {
-    updatedHTML =
-      '<div class="lab-meta-item">' +
-        '<span class="meta-label">Last updated</span>' +
-        '<span>' + esc(lab.updated) + '</span>' +
-      '</div>';
-  }
-
-  // Build meta bar (authors + date)
-  var metaHTML = "";
-  if (authorsHTML || updatedHTML) {
-    metaHTML = '<div class="lab-meta">' + authorsHTML + updatedHTML + '</div>';
-  }
-
   // Assemble the full page
   document.getElementById("lab-content").innerHTML =
     '<a href="index.html#labs" class="back-link">\u2190 All labs</a>' +
@@ -132,13 +153,14 @@ function renderLabPage() {
     '</div>' +
 
     metaHTML +
+    imageHTML +
 
     '<div class="lab-section">' +
       '<h2>Overview</h2>' +
       '<p>' + esc(lab.description) + '</p>' +
     '</div>' +
 
-    objectivesHTML +
+    pdfHTML +
     resourcesHTML;
 }
 

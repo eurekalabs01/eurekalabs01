@@ -5,85 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Eureka Labs — Free, inquiry-based, hands-on cybersecurity labs for students, practitioners, and educators at every skill level.">
   <title>Eureka Labs — Hands-on Labs for Learning Security</title>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- Google Analytics — Replace G-XXXXXXXXXX with your Measurement ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVHM47HLQ2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-SVHM47HLQ2');
   </script>
 </head>
-
 <body>
-
-  <!-- Keyboard accessibility -->
   <a href="#labs" class="skip-link">Skip to labs</a>
-
-
-  <!-- ==== NAV ==== -->
 
   <nav>
     <a href="index.html" class="logo">Eureka<em>Labs</em></a>
-
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#labs">Labs</a></li>
       <li><a href="#team">Team</a></li>
     </ul>
-
-    <button
-      class="hamburger"
-      aria-label="Open menu"
-      onclick="document.getElementById('mobile-menu').classList.add('open')"
-    >
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
-        <path d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
+    <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.add('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </nav>
 
-  <!-- Mobile menu overlay -->
   <div class="mobile-menu" id="mobile-menu">
-    <button
-      class="close-btn"
-      aria-label="Close menu"
-      onclick="this.parentElement.classList.remove('open')"
-    >
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
-        <path d="M6 6l12 12M6 18L18 6"/>
-      </svg>
+    <button class="close-btn" aria-label="Close menu" onclick="this.parentElement.classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
     </button>
     <a href="#about" onclick="this.parentElement.classList.remove('open')">About</a>
     <a href="#labs"  onclick="this.parentElement.classList.remove('open')">Labs</a>
     <a href="#team"  onclick="this.parentElement.classList.remove('open')">Team</a>
   </div>
 
-
-  <!-- ==== HERO ==== -->
-
   <section class="hero">
     <div class="hero-eyebrow">Cybersecurity Education</div>
     <h1>Hands-on labs for learning <span class="accent">security</span></h1>
-    <p>
-      Supporting students, practitioners, and educators in learning
-      security concepts through inquiry-based, hands-on experiences.
-      Free, open, and designed for every skill level.
-    </p>
+    <p>Supporting students, practitioners, and educators in learning security concepts through inquiry-based, hands-on experiences. Free, open, and designed for every skill level.</p>
     <a href="#labs" class="btn-primary">
       Browse the labs
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M3 8h10M9 4l4 4-4 4"/>
-      </svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
     <div class="hero-rule">
       <span></span>
@@ -91,77 +56,42 @@
     </div>
   </section>
 
-
-  <!-- ==== ABOUT ==== -->
-
   <section class="about" id="about">
     <div class="container">
       <div class="section-eyebrow">Mission</div>
       <div class="section-title">Built for curiosity<br>and rigor</div>
       <div class="about-columns">
-
         <div class="about-prose">
-          <p>
-            Eureka Labs is a collection of inquiry-based hands-on lab activities
-            that guide learners through authentic scenarios, each highlighting
-            key cybersecurity concepts and principles. Our goal is to provide
-            free, easy-to-use, and high-quality security education materials.
-          </p>
-          <p>
-            For educators, each lab includes teaching procedures, assessment
-            instruments, and adaptable resources. Our team continuously refines
-            materials to reflect the latest threats, techniques, and best
-            practices in the field.
-          </p>
-          <p>
-            We call these laboratory projects <em>Eureka Experiences</em> in
-            reference to the "aha!" moment of understanding a previously
-            incomprehensible concept.
-          </p>
+          <p>Eureka Labs is a collection of inquiry-based hands-on lab activities that guide learners through authentic scenarios, each highlighting key cybersecurity concepts and principles. Our goal is to provide free, easy-to-use, and high-quality security education materials.</p>
+          <p>For educators, each lab includes teaching procedures, assessment instruments, and adaptable resources. Our team continuously refines materials to reflect the latest threats, techniques, and best practices in the field.</p>
+          <p>We call these laboratory projects <em>Eureka Experiences</em> in reference to the "aha!" moment of understanding a previously incomprehensible concept.</p>
         </div>
-
         <div class="about-cards">
           <div class="about-card" style="--card-accent: var(--color-forest)">
-            <div class="badge" style="background: var(--color-forest-light); color: var(--color-forest)">
-              Exploratory &amp; Fundamental
-            </div>
+            <div class="badge" style="background: var(--color-forest-light); color: var(--color-forest)">Exploratory &amp; Fundamental</div>
             <h4>Spark curiosity</h4>
             <p>Designed for learners with little or no security background. Low barrier, high engagement — observe, question, and discover.</p>
           </div>
-
           <div class="about-card" style="--card-accent: var(--color-copper)">
-            <div class="badge" style="background: var(--color-copper-light); color: var(--color-copper)">
-              Core &amp; Advanced
-            </div>
+            <div class="badge" style="background: var(--color-copper-light); color: var(--color-copper)">Core &amp; Advanced</div>
             <h4>Build depth</h4>
             <p>Interactive labs that develop conceptual understanding and expand your technical repertoire through hands-on scenarios.</p>
           </div>
-
           <div class="about-card" style="--card-accent: var(--color-plum)">
-            <div class="badge" style="background: var(--color-plum-light); color: var(--color-plum)">
-              Challenging
-            </div>
+            <div class="badge" style="background: var(--color-plum-light); color: var(--color-plum)">Challenging</div>
             <h4>Push boundaries</h4>
             <p>Cutting-edge scenarios involving the latest security risks and emerging threats for experienced practitioners and researchers.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
-
-  <!-- ==== LABS (rendered by app.js) ==== -->
 
   <section class="labs" id="labs">
     <div class="container">
       <div class="section-eyebrow">Catalog</div>
       <div class="section-title">Lab collection</div>
-      <div class="section-desc">
-        Each lab includes procedures, learning objectives, and resources.
-        Filter by category or difficulty level.
-      </div>
-
+      <div class="section-desc">Each lab includes procedures, learning objectives, and resources. Filter by category or difficulty level.</div>
       <div class="filters-row">
         <div class="filter-group">
           <label id="cat-label">Category</label>
@@ -172,15 +102,11 @@
           <div class="filter-chips" id="level-filters" role="group" aria-labelledby="level-label"></div>
         </div>
       </div>
-
       <div class="labs-count" id="labs-count" aria-live="polite"></div>
       <div class="labs-list" id="labs-list"></div>
       <div class="no-results" id="no-results">No labs match the selected filters.</div>
     </div>
   </section>
-
-
-  <!-- ==== TEAM (rendered by app.js) ==== -->
 
   <section class="team" id="team">
     <div class="container">
@@ -190,9 +116,6 @@
       <div class="team-grid" id="team-grid"></div>
     </div>
   </section>
-
-
-  <!-- ==== FOOTER ==== -->
 
   <footer>
     <div class="footer-links">
@@ -204,10 +127,7 @@
     <p>&copy; 2026 Eureka Labs. All rights reserved.</p>
   </footer>
 
-
-  <!-- Scripts: data first, then home page rendering -->
   <script src="data.js"></script>
   <script src="app.js"></script>
-
 </body>
 </html>
