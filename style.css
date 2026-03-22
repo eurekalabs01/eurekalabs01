@@ -1,0 +1,798 @@
+/* ============================================================================
+   EUREKA LABS — SHARED STYLES
+   ============================================================================
+   This file contains all visual styles for both index.html and lab.html.
+   Design tokens (colors, fonts) are at the top — start here for theming.
+   ============================================================================ */
+
+
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* Page backgrounds */
+  --color-page:        #faf8f3;
+  --color-surface:     #f0ede6;
+  --color-surface-alt: #e6e2da;
+
+  /* Text hierarchy (darkest to lightest) */
+  --color-text:        #1a1a17;
+  --color-text-mid:    #5c5a52;
+  --color-text-muted:  #8a877e;
+  --color-text-faint:  #b5b2a9;
+
+  /* Accent colors */
+  --color-forest:       #1d6b52;
+  --color-forest-dark:  #155741;
+  --color-forest-light: #e4f2ec;
+
+  --color-copper:       #c45a2d;
+  --color-copper-light: #faeee8;
+
+  --color-plum:         #6b4f8a;
+  --color-plum-light:   #f0eaf6;
+
+  /* Fonts */
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+
+  /* Shared tokens */
+  --border-subtle: 1px solid rgba(0, 0, 0, 0.06);
+  --radius:        10px;
+  --radius-pill:   100px;
+}
+
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-page);
+  color: var(--color-text);
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-forest);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-copper);
+}
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-forest);
+  color: #fff;
+  border-radius: var(--radius);
+  z-index: 200;
+  font-size: 0.8rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+
+/* ==========================================================================
+   NAV (shared across all pages)
+   ========================================================================== */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(250, 248, 243, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: var(--border-subtle);
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+.logo em {
+  font-style: italic;
+  color: var(--color-forest);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+/* Hamburger — visible on mobile only */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-text);
+}
+
+/* Mobile nav overlay */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(250, 248, 243, 0.98);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.mobile-menu.open {
+  display: flex;
+}
+.mobile-menu a {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--color-text);
+}
+.mobile-menu .close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.mobile-menu .close-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-text);
+}
+
+
+/* ==========================================================================
+   LAYOUT HELPERS
+   ========================================================================== */
+
+section {
+  padding: 6rem 3rem;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-forest);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  line-height: 1.12;
+}
+
+.section-desc {
+  color: var(--color-text-mid);
+  max-width: 540px;
+  margin-bottom: 3rem;
+  font-size: 0.92rem;
+}
+
+
+/* ==========================================================================
+   SHARED TAG PILLS
+   ========================================================================== */
+
+.tag {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.18rem 0.5rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+}
+
+.tags {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+
+/* ==========================================================================
+   SHARED BUTTON
+   ========================================================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.6rem;
+  background: var(--color-forest);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.btn-primary:hover {
+  background: var(--color-forest-dark);
+  color: #fff;
+}
+.btn-primary svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s;
+}
+.btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* ==========================================================================
+   HERO (index.html)
+   ========================================================================== */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 3rem 6rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-forest);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 6.5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+.hero h1 .accent {
+  font-style: italic;
+  color: var(--color-copper);
+}
+
+.hero p {
+  max-width: 500px;
+  color: var(--color-text-mid);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 3rem;
+}
+
+.hero-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.hero-rule span {
+  height: 1px;
+  flex: 0 0 50px;
+  background: var(--color-text-faint);
+}
+.hero-rule small {
+  font-size: 0.7rem;
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+}
+
+
+/* ==========================================================================
+   ABOUT (index.html)
+   ========================================================================== */
+
+.about {
+  background: var(--color-page);
+  border-top: var(--border-subtle);
+}
+
+.about-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-prose {
+  color: var(--color-text-mid);
+  font-size: 0.92rem;
+}
+.about-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.about-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-card {
+  padding: 1.4rem 1.6rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--card-accent, var(--color-forest));
+  transition: background 0.25s;
+}
+.about-card:hover {
+  background: var(--color-surface-alt);
+}
+
+.about-card h4 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+.about-card p {
+  font-size: 0.8rem;
+  color: var(--color-text-mid);
+  line-height: 1.65;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.5rem;
+}
+
+
+/* ==========================================================================
+   LAB CATALOG (index.html)
+   ========================================================================== */
+
+.labs {
+  background: var(--color-surface);
+  border-top: var(--border-subtle);
+  border-bottom: var(--border-subtle);
+}
+
+.filters-row {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.filter-chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-pill);
+  background: var(--color-page);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.filter-btn:hover {
+  border-color: var(--color-text-mid);
+  color: var(--color-text-mid);
+}
+.filter-btn[aria-pressed="true"] {
+  border-color: var(--color-forest);
+  color: var(--color-forest);
+  background: var(--color-forest-light);
+}
+
+.labs-count {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.labs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.lab-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  background: var(--color-page);
+  transition: background 0.2s;
+  color: inherit;
+  text-decoration: none;
+}
+.lab-row:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: inherit;
+}
+
+.lab-row h3 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.lab-row .arrow {
+  font-size: 1.1rem;
+  color: var(--color-text-faint);
+  transition: transform 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.lab-row:hover .arrow {
+  transform: translateX(4px);
+  color: var(--color-forest);
+}
+
+.no-results {
+  padding: 3rem;
+  text-align: center;
+  background: var(--color-page);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  display: none;
+}
+
+
+/* ==========================================================================
+   TEAM (index.html)
+   ========================================================================== */
+
+.team {
+  background: var(--color-page);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2.5rem;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-style: italic;
+  background: var(--color-forest-light);
+  color: var(--color-forest);
+  border: 1px solid rgba(29, 107, 82, 0.15);
+}
+
+.team-member h4 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  margin-bottom: 0.15rem;
+}
+.team-member .role {
+  font-size: 0.8rem;
+  color: var(--color-text-mid);
+  margin-bottom: 0.25rem;
+}
+.team-member .affil {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+
+/* ==========================================================================
+   LAB DETAIL PAGE (lab.html)
+   ========================================================================== */
+
+.lab-page {
+  padding: 8rem 3rem 4rem;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+  transition: color 0.2s;
+}
+.back-link:hover {
+  color: var(--color-forest);
+}
+
+.lab-header {
+  margin-bottom: 2rem;
+}
+.lab-header .tags {
+  margin-bottom: 1rem;
+}
+.lab-header h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.lab-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-top: var(--border-subtle);
+  border-bottom: var(--border-subtle);
+}
+
+.lab-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.meta-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.lab-section {
+  margin-bottom: 2.5rem;
+}
+
+.lab-section h2 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+.lab-section p {
+  color: var(--color-text-mid);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+.objectives-list {
+  list-style: none;
+  padding: 0;
+}
+.objectives-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: var(--color-text-mid);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.objectives-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--color-forest);
+  font-weight: 600;
+}
+
+.resources-list {
+  list-style: none;
+  padding: 0;
+}
+.resources-list li {
+  margin-bottom: 0.5rem;
+}
+.resources-list li a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-forest);
+  transition: color 0.2s;
+}
+.resources-list li a:hover {
+  color: var(--color-copper);
+}
+
+.lab-not-found {
+  text-align: center;
+  padding: 4rem 0;
+}
+.lab-not-found h1 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.lab-not-found p {
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+
+/* ==========================================================================
+   FOOTER (shared across all pages)
+   ========================================================================== */
+
+footer {
+  padding: 3rem;
+  text-align: center;
+  border-top: var(--border-subtle);
+}
+footer p {
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--color-text-mid);
+  font-weight: 500;
+}
+
+.nsf-note {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+
+/* ==========================================================================
+   MOBILE (< 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem 1.5rem;
+  }
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+
+  .hero {
+    padding: 8rem 1.5rem 4rem;
+  }
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  .about-columns {
+    grid-template-columns: 1fr;
+  }
+  .filters-row {
+    gap: 1.5rem;
+  }
+
+  .lab-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+  }
+  .lab-row .arrow {
+    display: none;
+  }
+
+  .lab-page {
+    padding: 7rem 1.5rem 3rem;
+  }
+}

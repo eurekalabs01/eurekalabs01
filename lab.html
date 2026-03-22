@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eureka Labs — Hands-on cybersecurity lab">
+  <title>Lab — Eureka Labs</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Analytics — Replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+
+<body>
+
+  <!-- Keyboard accessibility -->
+  <a href="#lab-content" class="skip-link">Skip to content</a>
+
+
+  <!-- ==== NAV ==== -->
+
+  <nav>
+    <a href="index.html" class="logo">Eureka<em>Labs</em></a>
+
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#labs">Labs</a></li>
+      <li><a href="index.html#team">Team</a></li>
+    </ul>
+
+    <button
+      class="hamburger"
+      aria-label="Open menu"
+      onclick="document.getElementById('mobile-menu').classList.add('open')"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button
+      class="close-btn"
+      aria-label="Close menu"
+      onclick="this.parentElement.classList.remove('open')"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+        <path d="M6 6l12 12M6 18L18 6"/>
+      </svg>
+    </button>
+    <a href="index.html#about" onclick="this.parentElement.classList.remove('open')">About</a>
+    <a href="index.html#labs"  onclick="this.parentElement.classList.remove('open')">Labs</a>
+    <a href="index.html#team"  onclick="this.parentElement.classList.remove('open')">Team</a>
+  </div>
+
+
+  <!-- ==== LAB CONTENT (rendered by lab-app.js) ==== -->
+
+  <div class="lab-page" id="lab-content">
+    <!-- Content is injected here by lab-app.js based on the ?id= parameter -->
+  </div>
+
+
+  <!-- ==== FOOTER ==== -->
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/eurekalabs">GitHub</a>
+      <a href="mailto:eureka@miamioh.edu">Contact</a>
+      <a href="https://miamioh.edu">Miami University</a>
+    </div>
+    <p class="nsf-note">Supported in part by the National Science Foundation</p>
+    <p>&copy; 2026 Eureka Labs. All rights reserved.</p>
+  </footer>
+
+
+  <!-- Scripts: data first, then lab page rendering -->
+  <script src="data.js"></script>
+  <script src="lab-app.js"></script>
+
+</body>
+</html>
