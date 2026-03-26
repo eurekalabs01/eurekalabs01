@@ -10,47 +10,32 @@
 // ============================================================================
 
 
-function esc(str) {
-  var el = document.createElement("span");
-  el.textContent = str;
-  return el.innerHTML;
-}
-
-function tagHTML(label, color, bg) {
-  return '<span class="tag" style="--tag-bg:' + bg + ';--tag-color:' + color + '">' + esc(label) + '</span>';
-}
-
-
 // --- Filter State -----------------------------------------------------------
 
-var activeCat   = "all";
-var activeLevel = "all";
+let activeCat   = "all";
+let activeLevel = "all";
 
 
 // --- Filters ----------------------------------------------------------------
 
 function buildFilters() {
-  var catEl   = document.getElementById("cat-filters");
-  var levelEl = document.getElementById("level-filters");
+  const catEl   = document.getElementById("cat-filters");
+  const levelEl = document.getElementById("level-filters");
 
-  var catHTML = '<button class="filter-btn" aria-pressed="true" data-cat="all">All</button>';
-  for (var id in CATEGORIES) {
-    if (CATEGORIES.hasOwnProperty(id)) {
-      catHTML += '<button class="filter-btn" aria-pressed="false" data-cat="' + id + '">' + esc(CATEGORIES[id].label) + '</button>';
-    }
-  }
+  let catHTML = '<button class="filter-btn" aria-pressed="true" data-cat="all">All</button>';
+  Object.keys(CATEGORIES).forEach(function(id) {
+    catHTML += '<button class="filter-btn" aria-pressed="false" data-cat="' + id + '">' + esc(CATEGORIES[id].label) + '</button>';
+  });
   catEl.innerHTML = catHTML;
 
-  var levelHTML = '<button class="filter-btn" aria-pressed="true" data-level="all">All</button>';
-  for (var lvl in LEVELS) {
-    if (LEVELS.hasOwnProperty(lvl)) {
-      levelHTML += '<button class="filter-btn" aria-pressed="false" data-level="' + lvl + '">' + esc(LEVELS[lvl].label) + '</button>';
-    }
-  }
+  let levelHTML = '<button class="filter-btn" aria-pressed="true" data-level="all">All</button>';
+  Object.keys(LEVELS).forEach(function(lvl) {
+    levelHTML += '<button class="filter-btn" aria-pressed="false" data-level="' + lvl + '">' + esc(LEVELS[lvl].label) + '</button>';
+  });
   levelEl.innerHTML = levelHTML;
 
   catEl.addEventListener("click", function(e) {
-    var btn = e.target.closest(".filter-btn");
+    const btn = e.target.closest(".filter-btn");
     if (!btn) return;
     activeCat = btn.dataset.cat;
     catEl.querySelectorAll(".filter-btn").forEach(function(b) { b.setAttribute("aria-pressed", "false"); });
@@ -59,7 +44,7 @@ function buildFilters() {
   });
 
   levelEl.addEventListener("click", function(e) {
-    var btn = e.target.closest(".filter-btn");
+    const btn = e.target.closest(".filter-btn");
     if (!btn) return;
     activeLevel = btn.dataset.level;
     levelEl.querySelectorAll(".filter-btn").forEach(function(b) { b.setAttribute("aria-pressed", "false"); });
@@ -72,38 +57,42 @@ function buildFilters() {
 // --- Lab List ---------------------------------------------------------------
 
 function renderLabs() {
-  var filtered = LABS.filter(function(lab) {
-    var catOk   = activeCat   === "all" || lab.categories.indexOf(activeCat) !== -1;
-    var levelOk = activeLevel === "all" || lab.level === activeLevel;
+  const filtered = LABS.filter(function(lab) {
+    const catOk   = activeCat   === "all" || lab.categories.indexOf(activeCat) !== -1;
+    const levelOk = activeLevel === "all" || lab.level === activeLevel;
     return catOk && levelOk;
   });
 
-  var listEl  = document.getElementById("labs-list");
-  var countEl = document.getElementById("labs-count");
-  var emptyEl = document.getElementById("no-results");
+  const listEl  = document.getElementById("labs-list");
+  const countEl = document.getElementById("labs-count");
+  const emptyEl = document.getElementById("no-results");
 
   countEl.textContent = filtered.length + " lab" + (filtered.length !== 1 ? "s" : "");
 
   if (filtered.length === 0) {
-    listEl.style.display = "none";
+    listEl.classList.add("hidden");
     emptyEl.style.display = "block";
     return;
   }
 
-  listEl.style.display = "flex";
+  listEl.classList.remove("hidden");
   emptyEl.style.display = "none";
 
   listEl.innerHTML = filtered.map(function(lab) {
-    var catTags = lab.categories.map(function(catId) {
-      var c = CATEGORIES[catId] || { label: catId, color: "#666", bg: "#eee" };
+    const catTags = lab.categories.map(function(catId) {
+      const c = CATEGORIES[catId] || { label: catId, color: "#666", bg: "#eee" };
       return tagHTML(c.label, c.color, c.bg);
     }).join("");
 
-    var lv = LEVELS[lab.level] || { label: lab.level, color: "#666", bg: "#eee" };
-    var lvTag = tagHTML(lv.label, lv.color, lv.bg);
+    const lv = LEVELS[lab.level] || { label: lab.level, color: "#666", bg: "#eee" };
+    const lvTag = tagHTML(lv.label, lv.color, lv.bg);
+
+    const thumbHTML = lab.image
+      ? '<img class="lab-thumb" src="' + esc(lab.image) + '" alt="">'
+      : '<div class="lab-thumb"></div>';
 
     return '<a class="lab-row" href="lab.html?id=' + encodeURIComponent(lab.id) + '">' +
-      '<img class="lab-thumb" src="' + esc(lab.image) + '" alt="">' +
+      thumbHTML +
       '<div><h3>' + esc(lab.title) + '</h3></div>' +
       '<div class="tags">' + catTags + lvTag + '</div>' +
       '<div class="arrow">\u2192</div>' +
@@ -115,7 +104,7 @@ function renderLabs() {
 // --- Team -------------------------------------------------------------------
 
 function renderTeam() {
-  var grid = document.getElementById("team-grid");
+  const grid = document.getElementById("team-grid");
   grid.innerHTML = TEAM.map(function(m) {
     return '<div class="team-member">' +
       '<div class="team-avatar">' + esc(m.name.charAt(0)) + '</div>' +
