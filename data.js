@@ -1,7 +1,8 @@
 // ============================================================================
 //  EUREKA LABS — SITE DATA
 //  All content displayed on the site. Edit this file, commit, push to deploy.
-//  See README.md for instructions.
+//
+//  DATE FORMAT: use YYYY-MM-DD for all "updated" fields (e.g. "2024-03-15").
 // ============================================================================
 
 
@@ -233,7 +234,7 @@ const LABS = [
     authors: "Liran Ma, Zhipeng Cai",
     description: "We all need safe access to the Internet free from technology-facilitated threats such as cyberstalking and harassment. The learning objectives of this lab are for students to be aware of personally identifiable information. Students will experiment with technologies such as Virtual Private Networks (VPNs) that protect identity information via encryption.",
     image: "labs/invisible-surfing/invisible-surfing.jpeg",
-    pdf: "labs/invisible-surfing/Invisioble_Surfing.pdf",
+    pdf: "labs/invisible-surfing/Invisible_Surfing.pdf",
     updated: "2021-05-23", estimatedTime: "3 hours",
   },
 
@@ -306,7 +307,7 @@ const LABS = [
   {
     id: "one-pixel-attack",
     title: "\u201cPixie and Dixie vs. Mr. AI\u201d: One-Pixel Attack",
-    categories: ["mobile"], level: "advanced",
+    categories: ["mobile", "deeplearning", "ai"], level: "advanced",
     authors: "Zhipeng Cai, Liran Ma, Wei Cheng",
     description: "The purpose of this lab is to understand and exploit vulnerabilities of deep neural networks used in Internet of Things (IoT). Image data and a trained deep neural network model are typically used to classify an image on mobile and/or IoT devices. In this lab, you will pinpoint a vulnerable pixel such that changing this pixel will result in wrong classification prediction, which may confuse relevant security modules.",
     image: "labs/one-pixel-attack/one-pixel-attack.jpeg",
