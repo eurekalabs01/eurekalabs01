@@ -212,11 +212,14 @@ function renderTeam() {
     const avatar = m.image
       ? '<img class="team-avatar" src="' + esc(m.image) + '" alt="Photo of ' + esc(m.name) + '">'
       : '<div class="team-avatar">' + esc(m.name.charAt(0)) + '</div>';
+    const nameHTML = m.url
+      ? '<a href="' + esc(m.url) + '" target="_blank" rel="noopener">' + esc(m.name) + '</a>'
+      : esc(m.name);
     return '<div class="team-member">' +
       avatar +
-      '<h4>' + esc(m.name) + '</h4>' +
+      '<div><h4>' + nameHTML + '</h4>' +
       '<div class="role">' + esc(m.role) + '</div>' +
-      '<div class="affil">' + esc(m.affiliation) + '</div>' +
+      '<div class="affil">' + esc(m.affiliation) + '</div></div>' +
     '</div>';
   }).join("");
 }

@@ -31,10 +31,10 @@ const LEVELS = {
 // --- TEAM -------------------------------------------------------------------
 
 const TEAM = [
-  { name: "Liran Ma",        role: "Lead Principal Investigator", affiliation: "Miami University",           image: "team/ma.png" },
-  { name: "Zhipeng Cai",     role: "Lead Principal Investigator", affiliation: "Georgia State University",   image: "team/cai.jpg" },
-  { name: "Curby Alexander", role: "Principal Investigator",      affiliation: "Texas Christian University", image: "team/alexander.jpg" },
-  { name: "Yingshu Li",      role: "Principal Investigator",      affiliation: "Georgia State University",   image: "team/yingshu.jpg" },
+  { name: "Liran Ma",        role: "Lead Principal Investigator", affiliation: "Miami University",           image: "team/ma.png",        url: "https://miamioh.edu/profiles/cec/liran-ma.html" },
+  { name: "Zhipeng Cai",     role: "Lead Principal Investigator", affiliation: "Georgia State University",   image: "team/cai.jpg",       url: "https://cas.gsu.edu/profile/zhipeng-cai/" },
+  { name: "Curby Alexander", role: "Principal Investigator",      affiliation: "Texas Christian University", image: "team/alexander.jpg", url: "https://coe.tcu.edu/about/faculty-staff/view/curby-alexander" },
+  { name: "Yingshu Li",      role: "Principal Investigator",      affiliation: "Georgia State University",   image: "team/yingshu.jpg",   url: "https://cas.gsu.edu/profile/yingshu-li/" },
 ];
 
 
