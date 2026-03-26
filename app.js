@@ -103,6 +103,7 @@ function renderLabs() {
     var lvTag = tagHTML(lv.label, lv.color, lv.bg);
 
     return '<a class="lab-row" href="lab.html?id=' + encodeURIComponent(lab.id) + '">' +
+      '<img class="lab-thumb" src="' + esc(lab.image) + '" alt="">' +
       '<div><h3>' + esc(lab.title) + '</h3></div>' +
       '<div class="tags">' + catTags + lvTag + '</div>' +
       '<div class="arrow">\u2192</div>' +

@@ -5,6 +5,7 @@
       "name": "eurekalabs",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8080"],
+      "cwd": "/Users/lma/Documents/GitHub/eurekalabs01/.claude/worktrees/nice-knuth",
       "port": 8080
     }
   ]
