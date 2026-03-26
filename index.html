@@ -42,25 +42,25 @@
     <a href="#team"  onclick="this.parentElement.classList.remove('open')">Team</a>
   </div>
 
-  <section class="hero">
-    <div class="hero-eyebrow">Cybersecurity Education</div>
-    <h1>Hands-on labs for learning <span class="accent">security</span></h1>
-    <p>Supporting students, practitioners, and educators in learning security concepts through inquiry-based, hands-on experiences. Free, open, and designed for every skill level.</p>
-    <a href="#labs" class="btn-primary">
-      Browse the labs
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-    </a>
-    <div class="hero-rule">
-      <span></span>
-      <small>Supported by the National Science Foundation</small>
-    </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="container">
-      <div class="section-eyebrow">Mission</div>
-      <div class="section-title">Built for curiosity<br>and rigor</div>
-      <div class="about-columns">
+  <section class="hero" id="about">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Cybersecurity Education</div>
+        <h1>Hands-on labs for learning <span class="accent">security</span></h1>
+        <p>Supporting students, practitioners, and educators in learning security concepts through inquiry-based, hands-on experiences. Free, open, and designed for every skill level.</p>
+        <a href="#labs" class="btn-primary">
+          Browse the labs
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <div class="hero-rule">
+          <span></span>
+          <small>Supported by the National Science Foundation</small>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="section-eyebrow">Mission</div>
+        <div class="section-title">Built for curiosity<br>and rigor</div>
+        <div class="about-columns">
         <div class="about-prose">
           <p>Eureka Labs is a collection of inquiry-based hands-on lab activities that guide learners through authentic scenarios, each highlighting key cybersecurity concepts and principles. Our goal is to provide free, easy-to-use, and high-quality security education materials.</p>
           <p>For educators, each lab includes teaching procedures, assessment instruments, and adaptable resources. Our team continuously refines materials to reflect the latest threats, techniques, and best practices in the field.</p>
@@ -82,9 +82,9 @@
             <h4>Push boundaries</h4>
             <p>Cutting-edge scenarios involving the latest security risks and emerging threats for experienced practitioners and researchers.</p>
           </div>
-        </div>
-      </div>
-    </div>
+        </div><!-- /about-columns -->
+      </div><!-- /hero-right -->
+    </div><!-- /hero-grid -->
   </section>
 
   <section class="labs" id="labs">
