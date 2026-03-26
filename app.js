@@ -16,6 +16,8 @@ let activeCat   = "all";
 let activeLevel = "all";
 let activeSort  = "alpha";
 let searchQuery = "";
+let currentPage = 1;
+let pageSize    = 10;
 
 
 // --- Search & Sort ----------------------------------------------------------
@@ -26,6 +28,7 @@ function buildSearchSort() {
 
   searchEl.addEventListener("input", function() {
     searchQuery = this.value.trim().toLowerCase();
+    currentPage = 1;
     renderLabs();
   });
 
@@ -33,6 +36,7 @@ function buildSearchSort() {
     const btn = e.target.closest(".filter-btn");
     if (!btn) return;
     activeSort = btn.dataset.sort;
+    currentPage = 1;
     sortEl.querySelectorAll(".filter-btn").forEach(function(b) { b.setAttribute("aria-pressed", "false"); });
     btn.setAttribute("aria-pressed", "true");
     renderLabs();
@@ -62,6 +66,7 @@ function buildFilters() {
     const btn = e.target.closest(".filter-btn");
     if (!btn) return;
     activeCat = btn.dataset.cat;
+    currentPage = 1;
     catEl.querySelectorAll(".filter-btn").forEach(function(b) { b.setAttribute("aria-pressed", "false"); });
     btn.setAttribute("aria-pressed", "true");
     renderLabs();
@@ -71,6 +76,7 @@ function buildFilters() {
     const btn = e.target.closest(".filter-btn");
     if (!btn) return;
     activeLevel = btn.dataset.level;
+    currentPage = 1;
     levelEl.querySelectorAll(".filter-btn").forEach(function(b) { b.setAttribute("aria-pressed", "false"); });
     btn.setAttribute("aria-pressed", "true");
     renderLabs();
@@ -110,16 +116,24 @@ function renderLabs() {
     return 0;
   });
 
-  countEl.textContent = results.length + " lab" + (results.length !== 1 ? "s" : "");
+  const total = results.length;
+  countEl.textContent = total + " lab" + (total !== 1 ? "s" : "");
 
-  if (results.length === 0) {
+  if (total === 0) {
     listEl.classList.add("hidden");
     emptyEl.style.display = "block";
+    document.getElementById("pagination").innerHTML = "";
     return;
   }
 
   listEl.classList.remove("hidden");
   emptyEl.style.display = "none";
+
+  // 4. Paginate
+  const start = (currentPage - 1) * pageSize;
+  results = results.slice(start, start + pageSize);
+
+  renderPagination(total);
 
   listEl.innerHTML = results.map(function(lab) {
     const catTags = lab.categories.map(function(catId) {
@@ -141,6 +155,52 @@ function renderLabs() {
       '<div class="arrow">\u2192</div>' +
     '</a>';
   }).join("");
+}
+
+
+// --- Pagination -------------------------------------------------------------
+
+function renderPagination(total) {
+  const el         = document.getElementById("pagination");
+  const totalPages = Math.ceil(total / pageSize);
+
+  // Build per-page selector
+  const sizeHTML = '<div class="page-size">' +
+    '<span>Per page</span>' +
+    [5, 10].map(function(n) {
+      const pressed = pageSize === n ? "true" : "false";
+      return '<button class="filter-btn" aria-pressed="' + pressed + '" data-size="' + n + '">' + n + '</button>';
+    }).join("") +
+  '</div>';
+
+  // Build page buttons (always show all — max 7 pages at size 5)
+  let pagesHTML = '<div class="page-controls">';
+  pagesHTML += '<button class="page-btn" data-page="' + (currentPage - 1) + '"' + (currentPage === 1 ? ' disabled' : '') + '>\u2190 Prev</button>';
+  for (var i = 1; i <= totalPages; i++) {
+    pagesHTML += '<button class="page-btn' + (i === currentPage ? ' active' : '') + '" data-page="' + i + '">' + i + '</button>';
+  }
+  pagesHTML += '<button class="page-btn" data-page="' + (currentPage + 1) + '"' + (currentPage === totalPages ? ' disabled' : '') + '>Next \u2192</button>';
+  pagesHTML += '</div>';
+
+  el.innerHTML = '<div class="pagination-bar">' + sizeHTML + pagesHTML + '</div>';
+
+  // Wire up page navigation
+  el.querySelectorAll(".page-btn:not([disabled])").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      currentPage = parseInt(btn.dataset.page);
+      renderLabs();
+      document.getElementById("labs").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // Wire up per-page size
+  el.querySelectorAll("[data-size]").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      pageSize    = parseInt(btn.dataset.size);
+      currentPage = 1;
+      renderLabs();
+    });
+  });
 }
 
 
