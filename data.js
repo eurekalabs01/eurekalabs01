@@ -45,7 +45,9 @@ const TEAM = [
 
   { group: "ra", name: "Kien X. Nguyen",  role: "Research Assistant", affiliation: "", image: "team/kien.jpg", url: "https://nyquixt.github.io/" },
   { group: "ra", name: "Qingwen Liu",     role: "Research Assistant", affiliation: "", image: null,            url: "https://www.linkedin.com/in/qingwenliu/" },
-  { group: "ra", name: "Rongrong Qian",   role: "Research Assistant", affiliation: "", image: "team/rongrong.jpg", url: "https://www.linkedin.com/in/rongrong-ella-qian/" },
+  { group: "ra", name: "Rongrong Qian",        role: "Research Assistant", affiliation: "", image: "team/rongrong.jpg", url: "https://www.linkedin.com/in/rongrong-ella-qian/" },
+  { group: "ra", name: "Maria Kunigk-Bakalar", role: "Research Assistant", affiliation: "", image: null, url: null },
+  { group: "ra", name: "Dean DiCarlo",         role: "Research Assistant", affiliation: "", image: "team/dean.jpg", url: "https://www.linkedin.com/in/dean-dicarlo-ii/" },
 ];
 
 
