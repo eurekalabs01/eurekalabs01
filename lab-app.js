@@ -47,12 +47,7 @@ function renderLabPage() {
   }
 
   // Tags
-  let tagsHTML = lab.categories.map(function(catId) {
-    const c = CATEGORIES[catId] || { label: catId, color: "#666", bg: "#eee" };
-    return tagHTML(c.label, c.color, c.bg);
-  }).join("");
-  const lv = LEVELS[lab.level] || { label: lab.level, color: "#666", bg: "#eee" };
-  tagsHTML += tagHTML(lv.label, lv.color, lv.bg);
+  const tagsHTML = labTagsHTML(lab);
 
   // Image
   const imageHTML = lab.image
@@ -71,7 +66,7 @@ function renderLabPage() {
     ? '<div class="lab-section">' +
         '<h2>Lab manual</h2>' +
         '<a href="' + esc(lab.pdf) + '" target="_blank" rel="noopener" class="btn-primary">' +
-          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px"><path d="M3 14h10M8 2v9M4 7l4 4 4-4"/></svg>' +
+          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 14h10M8 2v9M4 7l4 4 4-4"/></svg>' +
           'View / Download PDF' +
         '</a>' +
       '</div>'

@@ -136,13 +136,7 @@ function renderLabs() {
   renderPagination(total);
 
   listEl.innerHTML = results.map(function(lab) {
-    const catTags = lab.categories.map(function(catId) {
-      const c = CATEGORIES[catId] || { label: catId, color: "#666", bg: "#eee" };
-      return tagHTML(c.label, c.color, c.bg);
-    }).join("");
-
-    const lv = LEVELS[lab.level] || { label: lab.level, color: "#666", bg: "#eee" };
-    const lvTag = tagHTML(lv.label, lv.color, lv.bg);
+    const allTags = labTagsHTML(lab);
 
     const thumbHTML = lab.image
       ? '<img class="lab-thumb" src="' + esc(lab.image) + '" alt="">'
@@ -151,7 +145,7 @@ function renderLabs() {
     return '<a class="lab-row" href="lab.html?id=' + encodeURIComponent(lab.id) + '">' +
       thumbHTML +
       '<div><h3>' + esc(lab.title) + '</h3></div>' +
-      '<div class="tags">' + catTags + lvTag + '</div>' +
+      '<div class="tags">' + allTags + '</div>' +
       '<div class="arrow">\u2192</div>' +
     '</a>';
   }).join("");
@@ -176,7 +170,7 @@ function renderPagination(total) {
   // Build page buttons (always show all — max 7 pages at size 5)
   let pagesHTML = '<div class="page-controls">';
   pagesHTML += '<button class="page-btn" data-page="' + (currentPage - 1) + '"' + (currentPage === 1 ? ' disabled' : '') + '>\u2190 Prev</button>';
-  for (var i = 1; i <= totalPages; i++) {
+  for (let i = 1; i <= totalPages; i++) {
     pagesHTML += '<button class="page-btn' + (i === currentPage ? ' active' : '') + '" data-page="' + i + '">' + i + '</button>';
   }
   pagesHTML += '<button class="page-btn" data-page="' + (currentPage + 1) + '"' + (currentPage === totalPages ? ' disabled' : '') + '>Next \u2192</button>';
@@ -187,7 +181,7 @@ function renderPagination(total) {
   // Wire up page navigation
   el.querySelectorAll(".page-btn:not([disabled])").forEach(function(btn) {
     btn.addEventListener("click", function() {
-      currentPage = parseInt(btn.dataset.page);
+      currentPage = parseInt(btn.dataset.page, 10);
       renderLabs();
       document.getElementById("labs").scrollIntoView({ behavior: "smooth" });
     });
@@ -196,7 +190,7 @@ function renderPagination(total) {
   // Wire up per-page size
   el.querySelectorAll("[data-size]").forEach(function(btn) {
     btn.addEventListener("click", function() {
-      pageSize    = parseInt(btn.dataset.size);
+      pageSize    = parseInt(btn.dataset.size, 10);
       currentPage = 1;
       renderLabs();
     });
